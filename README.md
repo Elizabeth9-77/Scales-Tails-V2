@@ -243,7 +243,7 @@ The wireframes for Scales & Tails were created in Figma and were high-spec from 
 - Sign Up
 - Profile
 
-Originally I had planned for the home page to be mostly icon based for quick and easy use. However, I felt that this format would suit a downloadable app version of FreeFido, instead of the web version, which regular users might avail of to give them quicker access to the booking page, especially if they are one-handed, walking the dog on the way to the park. This will be part of my future features for the project growth.
+Originally I had planned for the home page to be mostly icon based for quick and easy use. However, I felt that this format would suit a downloadable app version of Scales & Tails, instead of the web version, which regular users might avail of to give them quicker access to the booking page, especially if they are one-handed, walking the dog on the way to the park. This will be part of my future features for the project growth.
 
 <details open>
     <summary>Mobile/Tablet Home Page Wireframe</summary>  
@@ -317,7 +317,7 @@ The hero image of the beagle and patterned background was created in Figma. The 
 ### Database Schema - Entity Relationship Diagram
 
 ![ERD Image]()  
-*Database Schema (ERD) for FreeFido displaying relationships between feature components saved within the database*
+*Database Schema (ERD) for Scales & Tails displaying relationships between feature components saved within the database*
 
 This Entity Relationship Diagram(ERD) demonstrates how each feature interacts with each other and the connected PostgreSQL Database. Using Django's User Model, and Django AllAuth to carry out all user authentication, a user_id is created when the user registers with their username and email. This allows the user to edit a blank profile, create new articles, add comments and photos which will display their username, and create and manage their bookings. For future development, a Feedback system will be included allowing users to leave a review of the park.
 
@@ -359,7 +359,7 @@ CSRF (Cross-Site Request Forgery) tokens are included in every form to help auth
 
 ## User View - Registered/Unregistered
 
-It was important to me from the beginning that FreeFido be accessible to an unregistered user, in some capacitites. I wanted the website to sell the product to a new user quickly by immediately inviting them into the community through the park's information, articles and gallery sections. The following is a breakdown of the site's accessibility for registered/unregistered users:
+It was important to me from the beginning that Scales & Tails be accessible to an unregistered user, in some capacitites. I wanted the website to sell the product to a new user quickly by immediately inviting them into the community through the park's information, articles and gallery sections. The following is a breakdown of the site's accessibility for registered/unregistered users:
 
 | Feature   | Unregistered User | Registered, Logged-In User |
 |-----------|-------------------|-----------------|
@@ -370,7 +370,7 @@ It was important to me from the beginning that FreeFido be accessible to an unre
 
 ## CRUD Functionality
 
-Users are able to Create, Read, Update and Delete their shared information on FreeFido. Some features make full CRUD functionality available, whilst others present the necessary options only. Here is my CRUD breakdown for FreeFido:
+Users are able to Create, Read, Update and Delete their shared information on Scales & Tails. Some features make full CRUD functionality available, whilst others present the necessary options only. Here is my CRUD breakdown for Scales & Tails:
 
 | Feature | Create | Read | Update | Delete |
 |---------|--------|------|--------|--------|
@@ -392,7 +392,7 @@ Users are able to Create, Read, Update and Delete their shared information on Fr
 ![Profile Icon](documentation/final_views/profileicon_nav.png)  
 *Registered, Logged In view with Profile Icon*  
   
-As mentioned in the [Structural Plane](#structural-plane) section above, the icon navigation bar allows the user to make their way around the FreeFido site. The icons have a small amount of animation when hovered/clicked on and to reinforce the icon meaning, have tooltips on hover/touch (on mobile) that display their intention.
+As mentioned in the [Structural Plane](#structural-plane) section above, the icon navigation bar allows the user to make their way around the Scales & Tails site. The icons have a small amount of animation when hovered/clicked on and to reinforce the icon meaning, have tooltips on hover/touch (on mobile) that display their intention.
   
 
 
@@ -516,7 +516,7 @@ Unregistered Users have access to all posts available on Scales & Tails. When re
 *Site pagination kicks in to display 6 articles per page. Arrows at the base of the article section allow users to move forward and back*  
 
 
-Unregistered Users are free to read the articles and comments left on FreeFido but they cannot 'Like/Comment' them until they have signed up and logged in.
+Unregistered Users are free to read the articles and comments left on Scales & Tails but they cannot 'Like/Comment' them until they have signed up and logged in.
 
 ![like/comment count under article]()  
 *A Likes and Comments counter is visible under every article. Logged-In Users can interact by clicking the heart outline to like. 'Heart outline' icon is replaced by filled Heart icon*  
@@ -556,13 +556,13 @@ The user may create an article and include their own image or allow a placeholde
   
 
 <details>
-    <summary>Placeholder image for Articles - credit: Pattern Monster with FreeFido purple</summary>  
+    <summary>Placeholder image for Articles - credit: Pattern Monster with Scales & Tails purple</summary>  
     <img src="">  
 </details>
 
 
 ![feedback that article is awaiting spproval by Admin]()  
-*Admin approval is required for articles to keep FreeFido on topic. Feedback is provided to the user by message that the article is awaiting approval*
+*Admin approval is required for articles to keep Scales & Tails on topic. Feedback is provided to the user by message that the article is awaiting approval*
 
 
 **Edit Article**
@@ -577,7 +577,7 @@ The user may create an article and include their own image or allow a placeholde
     <img src="">  
 </details>
   
-If a user spots a typo, error or wants to add new information to their article, then they may edit the article and submit for immediate reposting. A certain amount of trust exists between Admin and the Scales & Tails community to hope that no inappropriate or off-topic content will be shared, which will result in an immediate deletion of the user's account by the Admin. These issues will be locked down in the future development of FreeFido to allow certain content/words to be flagged and removed by the Admin or not allow the form to be submitted in the first place. Community guidelines will also be developed.
+If a user spots a typo, error or wants to add new information to their article, then they may edit the article and submit for immediate reposting. A certain amount of trust exists between Admin and the Scales & Tails community to hope that no inappropriate or off-topic content will be shared, which will result in an immediate deletion of the user's account by the Admin. These issues will be locked down in the future development of Scales & Tails to allow certain content/words to be flagged and removed by the Admin or not allow the form to be submitted in the first place. Community guidelines will also be developed.
 
 <details>
     <summary>Edit Article Message</summary>  
@@ -619,7 +619,7 @@ A user may search for something particular using the 'Search' field, which only 
     <img src="">  
 </details>
   
-The booking system that has been created for FreeFido is a basic booking system that 'gets the job done' for the starting business. The user may create, edit and delete their bookings, they are informed if a date/time is unavailable and they see a display message if their booking is saved. For future development, the UI of this booking system will improve to make unavailable times shaded-out/hidden and the user will receive confirmation emails for all bookings saved. Only 4 bookings may be held for each user and currently this includes past bookings, which the user must delete themselves. This is to remind the user of all bookings incase they may have forgotten and not attended their booked time slot, making it unavailable for someone else. In the future booking feature, the user will receive an email informing them that they have missed a booking, the booking will be flagged with a red text message on the dashboard and the user will be reminded that repeated no-shows for bookings will have their access to bookings revoked for a period of time.
+The booking system that has been created for Scales & Tails is a basic booking system that 'gets the job done' for the starting business. The user may create, edit and delete their bookings, they are informed if a date/time is unavailable and they see a display message if their booking is saved. For future development, the UI of this booking system will improve to make unavailable times shaded-out/hidden and the user will receive confirmation emails for all bookings saved. Only 4 bookings may be held for each user and currently this includes past bookings, which the user must delete themselves. This is to remind the user of all bookings incase they may have forgotten and not attended their booked time slot, making it unavailable for someone else. In the future booking feature, the user will receive an email informing them that they have missed a booking, the booking will be flagged with a red text message on the dashboard and the user will be reminded that repeated no-shows for bookings will have their access to bookings revoked for a period of time.
 
 <details>
     <summary>Bookings Page - Max Bookings Reached</summary>  
@@ -634,8 +634,8 @@ The booking system that has been created for FreeFido is a basic booking system 
     <img src="documentation/final_views/booking_c.png">  
 </details>  
   
-For creating a booking, the user is informed of the necessary fields to be filled in to secure the booking via feedback. The user may add a second dog if they wish, or leave this to another time. A dropdown selection of 'Breed Choices' is made available for quicker booking, with 'Other' included for mixed breeds. This information is important to the FreeFido staff member who maybe operating the gate for allowing entry. The dog's appearance will help them to identify and confirm the booking along with the human user information.
-Date and time is selectable via a calendar widget for date and dropdown selection menu displaying the hour slots from 8am to 8pm. FreeFido is super kind and opens every single day of the year for it's community members.
+For creating a booking, the user is informed of the necessary fields to be filled in to secure the booking via feedback. The user may add a second dog if they wish, or leave this to another time. A dropdown selection of 'Breed Choices' is made available for quicker booking, with 'Other' included for mixed breeds. This information is important to the Scales & Tails staff member who maybe operating the gate for allowing entry. The dog's appearance will help them to identify and confirm the booking along with the human user information.
+Date and time is selectable via a calendar widget for date and dropdown selection menu displaying the hour slots from 8am to 8pm. Scales & Tails is super kind and opens every single day of the year for it's community members.
 
 ![past booking warning]()  
 *Warning shown to Users if they choose a date in the past, can only save a booking with a valid date/time*  
@@ -719,7 +719,7 @@ If a user no longer wants their image to appear, or if they have made a mistake,
     <img src="">  
 </details>
   
-This page offers the user business information including opening hours and address. An embedded interactive Google Map allows the user to see FreeFido's location without leaving the site. If they require driving directions to the park, they can click on the map's 'View larger map' link to go to Google Maps in a new browser tab.
+This page offers the user business information including opening hours and address. An embedded interactive Google Map allows the user to see Scales & Tails's location without leaving the site. If they require driving directions to the park, they can click on the map's 'View larger map' link to go to Google Maps in a new browser tab.
 
 For future development, this page will hold the 'Feedback' feature for registered users to leave a review of the park. 
 
@@ -738,10 +738,10 @@ These templates were added to this project in order to give the user the functio
 
 **Admin Panel**
 
-Through Django's built-in Administration Panel, the Admin has full access over the data submitted to the website by registered Users. To access the Admin panel the Admin user adds '/admin/' to the end of the URL to display [](). A username and password is requested. For FreeFido, Admin approval is needed for articles and comments to keep the site on topic and to prevent spamming. Registered, logged-in users' have instant access to make a booking and upload images.
+Through Django's built-in Administration Panel, the Admin has full access over the data submitted to the website by registered Users. To access the Admin panel the Admin user adds '/admin/' to the end of the URL to display [](). A username and password is requested. For Scales & Tails, Admin approval is needed for articles and comments to keep the site on topic and to prevent spamming. Registered, logged-in users' have instant access to make a booking and upload images.
 
 ![django admin panel view]()  
-*Django Admin panel view for FreeFido Administrator - content selection menu on left hand side*  
+*Django Admin panel view for Scales & Tails Administrator - content selection menu on left hand side*  
 
 
 Users articles and comments require approval by the Admin of Scales & Tails to keep the website content on topic. Admin can change the status of articles from 'Draft' to 'Published'.
@@ -781,7 +781,7 @@ Admin can control users bookings via the Django Admin panel.
 - [Django](https://www.djangoproject.com/) was used as the Python framework for the site.
 - [Cloudinary](https://cloudinary.com/) was used for cloud media storage of user uploaded images.
 - [ElephantSQL](https://www.elephantsql.com/) was used to host the PostgreSQL database needed to collect and recall the users data.
-- [Heroku](https://www.heroku.com) was used to host the FreeFido application.
+- [Heroku](https://www.heroku.com) was used to host the Scales & Tails application.
 - [WAVE](https://wave.webaim.org/) to evaluate the accessibility of the site.
 - [Procreate](https://procreate.com/) for image creation and editing.
 
@@ -946,7 +946,7 @@ A local clone of this repository can be made on GitHub. Please follow the below 
 6. Change the current working directory to the location you want the cloned directory to be made.
 7. Type `git clone` and paste in the copied URL from step 4.
 8. Press '**Enter**' for the local clone to be created.
-9. Using the ``pip3 install -r requirements.txt`` command, the dependencies and libraries needed for FreeFido will be installed.
+9. Using the ``pip3 install -r requirements.txt`` command, the dependencies and libraries needed for Scales & Tails will be installed.
 10. Set up your **env.py** file and from the above steps for Cloudinary and ElephantSQL, gather the Cloudinary API key and the Elephant SQL url for additon to your code.
 11. Ensure that your **env.py** file is placed in your **.gitignore** file and follow the remaining steps in the above Django Project Setup section before pushing your code to GitHub.
 
@@ -983,7 +983,7 @@ The following blogs/tutorials complemented my learning for this project, alongsi
 
 ## Media
 
-The following sites were used to gather the photographic media used in FreeFido:
+The following sites were used to gather the photographic media used in Scales & Tails:
 
 - [Pexels](https://www.pexels.com/)
 - [Unsplash](https://unsplash.com/)
