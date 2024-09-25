@@ -1,1 +1,1 @@
-web: gunicorn scales.wsgi
+web: gunicorn Scales.wsgi
