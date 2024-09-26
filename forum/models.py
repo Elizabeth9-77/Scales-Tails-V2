@@ -34,7 +34,7 @@ class Comment(models.Model):
         ordering = ["-created_on"]
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 # Forum nested replies model
 class Reply(models.Model):
