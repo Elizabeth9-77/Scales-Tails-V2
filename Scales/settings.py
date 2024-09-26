@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['8000-elizabeth97-scalestails-w9kj6jw2yz5.ws.codeinstitute-ide.net', 'scales-and-tails-b02a32c5979d.herokuapp.com']
 CSRF_TRUSTED_ORIGINS = [
