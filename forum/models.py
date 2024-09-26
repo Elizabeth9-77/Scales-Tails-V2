@@ -14,6 +14,12 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
 
+    class Meta:
+        ordering = ["-created_on"]
+
+    def __str__(self):
+        return f"The title of this post is {self.title}"
+
 # Forum comment model
 class Comment(models.Model):
     post = models.ForeignKey(
@@ -24,6 +30,12 @@ class Comment(models.Model):
     approved = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ["-created_on"]
+
+    def __str__(self):
+        return self.user
+
 # Forum nested replies model
 class Reply(models.Model):
     Comment = models.ForeignKey(Comment, related_name="replies", on_delete=models.CASCADE)
@@ -33,7 +45,7 @@ class Reply(models.Model):
     parent = models.ForeignKey("self", null=True, blank=True, related_name="child_replies", on_delete=models.CASCADE)
 
     def __str__(self):
-        return sef.user.username
+        return self.user.username
 
     @property
     def get_replies(self):
