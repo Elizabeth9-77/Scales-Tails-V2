@@ -31,9 +31,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['8000-elizabeth97-scalestails-w9kj6jw2yz5.ws.codeinstitute-ide.net', 'scales-and-tails-b02a32c5979d.herokuapp.com']
+
 CSRF_TRUSTED_ORIGINS = [
 'https://*.codeinstitute-ide.net',
-'https://*.herokuapp.com']
+'https://*.herokuapp.com'
+]
 
 
 # Application definition
@@ -129,7 +131,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
