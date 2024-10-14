@@ -34,11 +34,11 @@ class Comment(models.Model):
         ordering = ["-created_on"]
 
     def __str__(self):
-        return self.user.username
+        return self.author.username
 
 # Forum nested replies model
 class Reply(models.Model):
-    Comment = models.ForeignKey(Comment, related_name="replies", on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, related_name="replies", on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     reply = models.TextField()
