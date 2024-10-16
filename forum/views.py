@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import generic
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 from django.utils import timezone
 from .models import Post, Comment, Reply
 from .forms import CommentForm, ReplyForm, PostForm
@@ -108,3 +109,56 @@ def create_post(request):
     else:
         form = PostForm()
     return render(request, 'forum/create_post.html', {'form': form})
+
+# comment edit
+def comment_edit(request, slug, comment_id):
+    """
+    view to edit comments
+    """
+    if request.method == "POST":
+
+        queryset = Post.objects.filter(status=1)
+        post = get_object_or_404(queryset, slug=slug)
+        comment = get_object_or_404(Comment, pk=comment_id)
+        comment_form = CommentForm(data=request.POST, instance=comment)
+
+        if comment_form.is_valid() and comment.author == request.user:
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.approved = False
+            comment.save()
+            messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
+        else:
+            messages.add_message(request, messages.ERROR, 'Error updating comment!')
+
+    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+def comment_delete(request, slug, comment_id):
+    """
+    view to delete comment
+    """
+    queryset = Post.objects.filter(status=1)
+    post = get_object_or_404(queryset, slug=slug)
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if comment.author == request.user:
+        comment.delete()
+        messages.add_message(request, messages.SUCCESS, 'Comment deleted!')
+    else:
+        messages.add_message(request, messages.ERROR, 'You can only delete your own comments!')
+
+    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+def delete_post(request, slug):
+    queryset = Post.objects.filter(status=1)
+    post = get_object_or_404(Post, slug=slug)
+    
+    # Check if the user is the author of the post
+    if request.user == post.author:
+        post.delete()
+        messages.success(request, 'Post deleted successfully.')
+        return redirect('home')  # Redirect to the home page after deletion
+    else:
+        messages.error(request, 'You do not have permission to delete this post.')
+        return redirect('post_detail', slug=slug)
