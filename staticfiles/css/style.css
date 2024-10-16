@@ -26,7 +26,7 @@ body {
 }
 
 .main-bg {
-    background-color: #F9FAFC;
+    background-color: #F2c48d;
 }
 
 .card {
@@ -67,7 +67,7 @@ body {
 }
 
 .masthead-text {
-    background-color: #445261;
+    background-color: #a66641;
     color: white;
     position: relative;
 }
@@ -84,7 +84,7 @@ body {
     right: 90%;
     height: 100%;
     width: 150%;
-    background: #445261;
+    background: #a66641;
     -webkit-transform: skew(15deg);
     -moz-transform: skew(15deg);
     transform: skew(15deg);
@@ -124,7 +124,7 @@ body {
 }
 
 .link {
-    color: #23BBBB;
+    color: #733f2d;
     text-decoration: none;
 }
 
@@ -158,4 +158,12 @@ body {
 
 .approval {
     color: rgb(222, 146, 168);
+}
+
+.navbar {
+    background-color: #f2bc57
+}
+
+.nav-link {
+    color: #733f2d
 }
