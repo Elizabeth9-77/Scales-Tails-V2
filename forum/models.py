@@ -44,9 +44,12 @@ class Reply(models.Model):
     reply = models.TextField()
     parent = models.ForeignKey("self", null=True, blank=True, related_name="child_replies", on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.user.username
+    class Meta:
+        ordering = ['timestamp']
 
+    def __str__(self):
+        return f"Reply by {self.user.username} on {self.timestamp}"
+        
     @property
     def get_replies(self):
         return self.child_replies.all()
