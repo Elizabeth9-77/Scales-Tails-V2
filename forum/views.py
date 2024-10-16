@@ -1,8 +1,11 @@
+import logging
+from django.utils.text import slugify
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 from .models import Post, Comment, Reply
 from .forms import CommentForm, ReplyForm, PostForm
 
@@ -32,8 +35,10 @@ def post_detail(request, slug):
     :template:`blog/post_detail.html`
     """
 
+    logger.debug(f"Attempting to retrieve post with slug: {slug}")
     queryset = Post.objects.filter(status=1)
     post = get_object_or_404(queryset, slug=slug)
+    logger.debug(f"Post retrieved: {post.title} (slug: {post.slug})")
     comments = post.comments.all().order_by("-created_on")
     comment_count = post.comments.filter(approved=True).count()
 
@@ -98,19 +103,24 @@ def post_detail(request, slug):
     )
 
 # New create_post view
+@login_required
 def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
+            post.status = 0
             post.save()
-            return redirect('post_detail', slug=post.slug)
+            messages.success(request, 'Your post has been submitted for approval.')
+            # return redirect('post_detail', slug=post.slug)
+            return redirect('home')
     else:
         form = PostForm()
     return render(request, 'forum/create_post.html', {'form': form})
 
 # comment edit
+@login_required
 def comment_edit(request, slug, comment_id):
     """
     view to edit comments
@@ -133,6 +143,7 @@ def comment_edit(request, slug, comment_id):
 
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
+@login_required
 def comment_delete(request, slug, comment_id):
     """
     view to delete comment
@@ -149,7 +160,44 @@ def comment_delete(request, slug, comment_id):
 
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
+logger = logging.getLogger(__name__)
 
+@login_required
+def edit_post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    logger.debug(f"Editing post: {post.title} (slug: {post.slug})")
+    
+    if request.user != post.author:
+        messages.error(request, "You don't have permission to edit this post.")
+        return redirect('post_detail', slug=slug)
+    
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            edited_post = form.save(commit=False)
+            old_slug = post.slug
+            new_title = form.cleaned_data['title']
+            
+            if new_title != post.title:
+                new_slug = slugify(new_title)
+                logger.debug(f"Title changed. Old: {post.title}, New: {new_title}")
+                logger.debug(f"Slug changed. Old: {old_slug}, New: {new_slug}")
+                edited_post.slug = new_slug
+            
+            edited_post.status = 0  # Set back to draft
+            edited_post.save()
+            logger.debug(f"Post saved. Title: {edited_post.title}, Slug: {edited_post.slug}")
+            
+            messages.success(request, 'Your post has been updated and is awaiting approval.')
+            return redirect('post_detail', slug=edited_post.slug)
+        else:
+            logger.error(f"Form errors: {form.errors}")
+    else:
+        form = PostForm(instance=post)
+    
+    return render(request, 'forum/edit_post.html', {'form': form, 'post': post})
+
+@login_required
 def delete_post(request, slug):
     queryset = Post.objects.filter(status=1)
     post = get_object_or_404(Post, slug=slug)
