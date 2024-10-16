@@ -83,20 +83,24 @@
     <div class="col-md-10 offset-md-1">
       <h3>Comments:</h3>
       {% for comment in comments %}
-      <div class="card mb-4">
-        <div class="card-body">
-          {% if comment.approved or user.is_staff or user == post.author %}
-          <p class="font-weight-bold">
-            {{ comment.author }}
-            <span class="font-weight-normal">
-              {{ comment.created_on }}
-            </span> wrote:
-          </p>
-          <div id="comment{{ comment.id }}">
-            {{ comment.body | linebreaks }}
-          </div>
+  {% if comment.approved or user.is_staff or user == post.author %}
+    <div class="card mb-4">
+      <div class="card-body">
+        <p class="font-weight-bold">
+          {{ comment.author }}
+          <span class="font-weight-normal">
+            {{ comment.created_on }}
+          </span> wrote:
+        </p>
+        <div id="comment{{ comment.id }}">
+          {{ comment.body | linebreaks }}
+        </div>
 
-          {% if comment.approved %}
+        {% if not comment.approved and user.is_staff or user == post.author %}
+          <p class="text-muted">(This comment is awaiting approval)</p>
+        {% endif %}
+
+        {% if comment.approved %}
           <!-- Reply Form -->
           <button class="btn btn-sm btn-secondary mt-2" type="button" data-bs-toggle="collapse"
             data-bs-target="#replyForm{{ comment.id }}">
