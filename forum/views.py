@@ -3,13 +3,19 @@ from django.views import generic
 from django.contrib import messages
 from django.utils import timezone
 from .models import Post, Comment, Reply
-from .forms import CommentForm, ReplyForm
+from .forms import CommentForm, ReplyForm, PostForm
 
 # Create your views here.
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by("-created_on")
     template_name = "forum/index.html"
     paginate_by = 6
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['welcome_text'] = "Welcome to my Boa care forum!"
+        context['welcome_image'] = "images/pexels-ivan-rojas-1655669943-28290883.webp"
+        return context
 
 def post_detail(request, slug):
     """
@@ -89,3 +95,16 @@ def post_detail(request, slug):
             "reply_form": reply_form
         }
     )
+
+# New create_post view
+def create_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('post_detail', slug=post.slug)
+    else:
+        form = PostForm()
+    return render(request, 'forum/create_post.html', {'form': form})

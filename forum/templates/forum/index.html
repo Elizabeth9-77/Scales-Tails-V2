@@ -1,6 +1,89 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
+
+<div class="container"></div>
+    <!-- Welcome section -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <img src="{% static welcome_image %}" alt="Welcome" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <h2>{{ welcome_text }}</h2>
+            <p>BOA CONSTRICTOR CARE
+                The Common or Red-tailed Boa (Boa constrictor constrictor) originates from the rainforests of Southern America,
+                where it can be found in a variety of places from the forest floor to trees, and even in water at times. Anyone
+                thinking of owning a boa should carefully consider the size of an adult snake, and consider the space
+                requirement, expense, and dangers of owning such a snake, which can grow at least 2-3m in length, and can live
+                for 20-30 years in captivity.
+            </p>
+            <p>
+                HOUSING
+                • As large a vivarium or purpose-built enclosure as possible should be provided to enable room for
+                exercise, and a thermal gradient to be created along the length of the tank (hot to cold). Wooden or
+                fibreglass vivaria will provide the snake with some visual security and ventilation can be provided at
+                snake level.
+                • Good ventilation is required and additional ventilation holes may need to be created.
+                • Hides are required to provide some security. Artificial plants, cardboard boxes, plant pots, logs or
+                commercially available hides can be used. They should be placed both at the warm and cooler ends of
+                the tank.
+                • Substrates suitable for housing snakes include newspaper, Astroturf and some of the commercially
+                available substrates. It is important that the substrates either cannot be eaten, or if they are, do not
+                cause blockages as this can prove fatal. Wood chip based substrates should never be used for this
+                reason.
+                • The vivarium should be cleaned out at least once a week with a suitable disinfectant and spot cleaned
+                daily to help prevent disease.
+            </p>
+            <p>
+                TEMPERATURES AND HUMIDITY
+                • Reptiles are ectothermic so a heat source is required.
+                • Typically a spot area is created using a spot bulb, providing a basking temperature of 35°C. This should
+                be kept on all day. Temperatures must be measured to ensure the tank is not overheating especially in a
+                small vivarium. The cool end should be maintained at 25°C.
+                • Background heat can be provided with a heat mat (on the back wall) a tubular heater, a heat plate or a
+                ceramic bulb. This should be set on a thermostat so that the overnight temperature does not drop
+                below 25°C.
+                • Temperatures should be measured with a maximum/minimum thermometer. During the cold winter
+                months careful checking is required to ensure the heat sources are keeping the tank sufficiently warm.
+                Heat sources should be guarded to prevent thermal burns.
+                • Humidity should be checked with a hygrometer and kept moderately high by spraying or fogging the
+                enclosure at regular intervals.
+            </p>
+            <p>
+                LIGHTING
+                • Despite being crepuscular species (active at dawn and dusk), boa constrictors appear to benefit from
+                UV-b light.
+                • A low percentage UV light is recommended. This will need to be on all day for 12 hours and at an
+                appropriate distance from the snake as recommended by the manufacturer. A small branch or rock can
+                be placed below the basking site (please ask for further information on UV light in reptiles).
+                • All UV-b bulbs should be checked regularly for their UV output and should be changed at least as
+                frequently as manufacturer’s instructions.
+            </p>
+            <p>
+                COMPANIONS
+                • In general the happiest snake is the solitary snake.
+            </p>
+            <p>
+                WHAT TO FEED
+                • Boa constrictors are carnivores and their main diet consists of pink mice and fuzzies for hatchlings. As
+                the snake grows, so will the frequency & amount of food given and an increase in prey size, from pinkie
+                mice to larger prey such as rats should be made. Food should be defrosted and warmed to blood
+                temperature 37°C prior to feeding. Handling should be avoided to stop contamination with human
+                scent. Ideally brown or black rodents should be fed in preference to white rodents.
+                • Water should always be available and a container is required which will allow the snake to submerge
+                completely. This should be changed daily.
+            </p>
+            <p>
+                SALMONELLA
+                • All reptiles can potentially carry Salmonella.
+                • However it is rarely a cause of illness in reptiles and treatment is not required.
+                • It can be transmitted to people (especially young children or those who are immuno-compromised) so
+                good hygiene after handing the reptile is important. Generally washing your hands in soap is sufficient.
+                There are commercially available disinfectants that can be used as an alternative.
+            </p>
+        </div>
+    </div>
 
 <!-- index.html content starts here -->
 <div class="container-fluid">
@@ -8,6 +91,10 @@
 
         <!-- Blog Entries Column -->
         <div class="col-12 mt-3 left">
+            <!-- Add the Create New Post button here -->
+            <div class="mb-4">
+                <a href="{% url 'create_post' %}" class="btn btn-primary">Create New Post</a>
+            </div>
             <div class="row">
                 {% for post in post_list %}
                 <div class="col-md-4">
