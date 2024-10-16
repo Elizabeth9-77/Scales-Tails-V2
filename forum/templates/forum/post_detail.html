@@ -83,87 +83,95 @@
     <div class="col-md-10 offset-md-1">
       <h3>Comments:</h3>
       {% for comment in comments %}
-  {% if comment.approved or user.is_staff or user == post.author %}
-    <div class="card mb-4">
-      <div class="card-body">
-        <p class="font-weight-bold">
-          {{ comment.author }}
-          <span class="font-weight-normal">
-            {{ comment.created_on }}
-          </span> wrote:
-        </p>
-        <div id="comment{{ comment.id }}">
-          {{ comment.body | linebreaks }}
-        </div>
+        {% if comment.approved or user.is_staff or user == post.author %}
+          <div class="card mb-4">
+            <div class="card-body">
+              <p class="font-weight-bold">
+                {{ comment.author }}
+                <span class="font-weight-normal">
+                  {{ comment.created_on }}
+                </span> wrote:
+              </p>
+              <div id="comment{{ comment.id }}">
+                {{ comment.body | linebreaks }}
+              </div>
 
-        {% if not comment.approved and user.is_staff or user == post.author %}
-          <p class="text-muted">(This comment is awaiting approval)</p>
-        {% endif %}
+              {% if not comment.approved and user.is_staff or user == post.author %}
+                <p class="text-muted">(This comment is awaiting approval)</p>
+              {% endif %}
 
-        {% if comment.approved %}
-          <!-- Reply Form -->
-          <button class="btn btn-sm btn-secondary mt-2" type="button" data-bs-toggle="collapse"
-            data-bs-target="#replyForm{{ comment.id }}">
-            Reply
-          </button>
-          <div class="collapse mt-2" id="replyForm{{ comment.id }}">
-            <form method="post">
-              {% csrf_token %}
-              {{ reply_form|crispy }}
-              <input type="hidden" name="comment_id" value="{{ comment.id }}">
-              <button type="submit" name="reply_form" class="btn btn-sm btn-primary">Submit Reply</button>
-            </form>
-          </div>
-          {% endif %}
-          {% if user.is_authenticated and comment.author == user %}
-          <button class="btn btn-delete" comment_id="{{ comment.id }}">Delete</button>
-          <button class="btn btn-sm btn-secondary mt-2 btn-edit" comment_id="{{ comment.id }}">Edit</button>
-          {% endif %}
-
-          <!-- Replies -->
-          <div class="mt-3">
-            {% for reply in comment.replies.all %}
-            {% if reply.approved or user.is_staff or user == post.author %}
-            <div class="card mb-2">
-              <div class="card-body">
-                <p><strong>{{ reply.user }}</strong> replied on {{ reply.timestamp }}:</p>
-                <p>{{ reply.reply | linebreaks }}</p>
-
-                {% if not reply.approved %}
-                <p class="text-muted">(This reply is awaiting approval)</p>
+              {% if comment.approved %}
+                {% if user.is_authenticated %}
+                    <!-- Reply Form -->
+                    <button class="btn btn-sm btn-secondary mt-2" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#replyForm{{ comment.id }}">
+                      Reply
+                    </button>
+                    <div class="collapse mt-2" id="replyForm{{ comment.id }}">
+                      <form method="post">
+                        {% csrf_token %}
+                        {{ reply_form|crispy }}
+                        <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                        <button type="submit" name="reply_form" class="btn btn-sm btn-primary">Submit Reply</button>
+                      </form>
+                    </div>
+                  {% else %}
+                    <p>Please <a href="{% url 'login' %}">log in</a> to reply to comments.</p>
+                  {% endif %}
                 {% endif %}
 
-                {% if reply.approved %}
+                {% if user.is_authenticated and comment.author == user %}
+                  <button class="btn btn-delete" comment_id="{{ comment.id }}">Delete</button>
+                  <button class="btn btn-sm btn-secondary mt-2 btn-edit" comment_id="{{ comment.id }}">Edit</button>
+                {% endif %}
 
-                <!-- Nested Reply Form -->
-                <button class="btn btn-sm btn-secondary mt-2" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#nestedReplyForm{{ reply.id }}">
-                  Reply
-                </button>
-                <div class="collapse mt-2" id="nestedReplyForm{{ reply.id }}">
-                  <form method="post">
-                    {% csrf_token %}
-                    {{ reply_form|crispy }}
-                    <input type="hidden" name="comment_id" value="{{ comment.id }}">
-                    <input type="hidden" name="parent_id" value="{{ reply.id }}">
-                    <button type="submit" name="reply_form" class="btn btn-sm btn-primary">Submit Reply</button>
-                  </form>
+                <!-- Replies -->
+                <div class="mt-3">
+                  {% for reply in comment.replies.all %}
+                    {% if reply.approved or user.is_staff or user == post.author %}
+                      <div class="card mb-2">
+                        <div class="card-body">
+                          <p><strong>{{ reply.user }}</strong> replied on {{ reply.timestamp }}:</p>
+                          <p>{{ reply.reply | linebreaks }}</p>
+
+                          {% if not reply.approved %}
+                            <p class="text-muted">(This reply is awaiting approval)</p>
+                          {% endif %}
+
+                          {% if reply.approved %}
+                            {% if user.is_authenticated %}
+                              <!-- Nested Reply Form -->
+                              <button class="btn btn-sm btn-secondary mt-2" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#nestedReplyForm{{ reply.id }}">
+                                Reply
+                              </button>
+                              <div class="collapse mt-2" id="nestedReplyForm{{ reply.id }}">
+                                <form method="post">
+                                  {% csrf_token %}
+                                  {{ reply_form|crispy }}
+                                  <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                  <input type="hidden" name="parent_id" value="{{ reply.id }}">
+                                  <button type="submit" name="reply_form" class="btn btn-sm btn-primary">Submit Reply</button>
+                                </form>
+                              </div>
+                            {% else %}
+                              <p>Please <a href="{% url 'login' %}">log in</a> to reply to comments.</p>
+                            {% endif %}
+                          {% endif %}
+                        </div>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
                 </div>
-                {% endif %}
               </div>
             </div>
-            {% endif %}
-            {% endfor %}
-          </div>
           {% endif %}
-        </div>
-      </div>
-      {% empty %}
-      <p>No comments yet.</p>
+        {% empty %}
+          <p>No comments yet.</p>
       {% endfor %}
     </div>
   </div>
-</div>
+
 
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
