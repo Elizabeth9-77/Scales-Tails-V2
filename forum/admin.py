@@ -34,6 +34,4 @@ class ReplyAdmin(admin.ModelAdmin):
     list_filter = ('timestamp', 'user')
     search_fields = ('user__username', 'reply', 'comment__body')
 
-# Register your models here.
-# admin.site.register(Comment)
-# admin.site.register(Reply)
+

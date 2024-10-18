@@ -58,10 +58,7 @@ def post_detail(request, slug):
                 return redirect('post_detail', slug=post.slug)
             else:
                 messages.error(request, 'There was an error submitting your comment, please try again')
-    #     else:
-    #         comment_form = CommentForm
 
-    # comment_form = CommentForm()
 
         # handle the reply form
         elif "reply_form" in request.POST:
@@ -187,7 +184,7 @@ def edit_post(request, slug):
                 logger.debug(f"Slug changed. Old: {old_slug}, New: {new_slug}")
                 edited_post.slug = new_slug
             
-            edited_post.status = 0  # Set back to draft
+            edited_post.status = 0  
             edited_post.save()
             logger.debug(f"Post saved. Title: {edited_post.title}, Slug: {edited_post.slug}")
             
@@ -209,7 +206,7 @@ def delete_post(request, slug):
     if request.user == post.author:
         post.delete()
         messages.success(request, 'Post deleted successfully.')
-        return redirect('home')  # Redirect to the home page after deletion
+        return redirect('home')  
     else:
         messages.error(request, 'You do not have permission to delete this post.')
         return redirect('post_detail', slug=slug)

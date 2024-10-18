@@ -11,7 +11,7 @@ class CommentForm(forms.ModelForm):
 class ReplyForm(forms.ModelForm):
     class Meta:
         model = Reply
-        fields = ['reply']  # Only the reply text field
+        fields = ['reply'] 
 
 class PostForm(forms.ModelForm):
     class Meta:
