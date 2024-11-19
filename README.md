@@ -350,6 +350,9 @@ Users articles and comments require approval by the Admin of Scales & Tails to k
 - [LogoAI](https://www.logoai.com/) for design inspiration using my font and colour choices.
 
 ## Testing
+
+(staticfiles/images/readme/test-table-scalestails.webp)
+
 Validation was carried out using:
 -W3C HTML Validator [W3C Validatator](https://validator.w3.org/detailed.html)
 -W3 Jigsaw CSS validator [W3 Jigsaw](https://jigsaw.w3.org/css-validator/)

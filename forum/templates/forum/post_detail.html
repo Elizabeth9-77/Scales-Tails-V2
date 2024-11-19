@@ -16,7 +16,7 @@
         <p class="post-subtitle">{{ post.author }} | {{ post.created_on }}</p>
       </div>
       <div class="d-none d-md-block col-md-6 masthead-image">
-        <img src="{% static 'images/logo.webp' %}" class="scale" alt="placeholder">
+        <img src="{% static 'images/logo.webp' %}" class="scale" alt="site name and logo">
       </div>
     </div>
   </div>
@@ -73,7 +73,7 @@
               name="comment_form">Submit</button>
           </form>
           {% else %}
-          <p>Log in to leave a comment</p>
+          <p>Please <a href="{% url 'account_login' %}">log in</a> to leave a comment.</p>
           {% endif %}
         </div>
       </div>
@@ -118,7 +118,7 @@
                       </form>
                     </div>
                   {% else %}
-                    <p>Please <a href="{% url 'login' %}">log in</a> to reply to comments.</p>
+                    <p>Please <a href="{% url 'account_login' %}">log in</a> to reply to comments.</p>
                   {% endif %}
                 {% endif %}
 
